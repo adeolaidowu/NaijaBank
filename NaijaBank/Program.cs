@@ -52,55 +52,6 @@ namespace NaijaBank
                     Console.WriteLine("Press any key to return to the Main Menu");
                     Console.ReadLine();
                     goto MainMenu;
-
-                /*/// GET DETAILS NEEDED TO CREATE ACCOUNT
-                AccountChoice: Console.WriteLine("Select Account Type (Type the corresponding number of your selection)");
-                    Console.WriteLine("1. Savings - Minimum deposit required is N100");
-                    Console.WriteLine("2. Current - Minimum deposit required is N1000");
-                    var accountType = Console.ReadLine();
-                    string type;
-                    if (accountType == 1.ToString())
-                    {
-
-                        Console.WriteLine("How much do you want to deposit?");
-                        var amount = decimal.Parse(Console.ReadLine());
-                        while (amount < 100)
-                        {
-                            Console.WriteLine("Minimum deposit required for a savings account is N100");
-                            Console.Write("Enter deposit amount: ");
-                            amount = decimal.Parse(Console.ReadLine());
-                        }
-                        type = "savings";
-                        BankAccount customerAccount = new BankAccount(newCustomer, type, amount);
-                        Console.WriteLine(customerAccount.Note);
-                        Console.WriteLine("Return to the main menu to Login. Press any key to go to the main menu");
-                        Console.ReadLine();
-                        goto MainMenu;
-                        //LogIn();
-
-                    }
-                    else if (accountType == 2.ToString())
-                    {
-                        Console.WriteLine("How much do you want to deposit?");
-                        var amount = decimal.Parse(Console.ReadLine());
-                        while (amount < 1000)
-                        {
-                            Console.WriteLine("Minimum deposit required for a current account is N1000");
-                            Console.Write("Enter deposit amount: ");
-                            amount = decimal.Parse(Console.ReadLine());
-                        }
-                        type = "current";
-                        BankAccount customerAccount = new BankAccount(newCustomer, type, amount);
-                        Console.WriteLine(customerAccount.Note);
-                        Console.WriteLine("Return to the main menu to Login. Press any key to go to the main menu");
-                        Console.ReadLine();
-                        goto MainMenu;
-                        //LogIn();
-                    }
-                    else Console.WriteLine("Invalid selection. Press any key to try again");
-                    Console.ReadLine();
-                    goto AccountChoice;
-                    #endregion*/
                 }
             }
             /// WHAT TO DO IF USER SELECTS OPTION TO LOGIN
@@ -191,76 +142,89 @@ namespace NaijaBank
                             BankAccount SelectedAccount = null;
                             foreach (var account in customer.myAccounts)
                             {
+                                Console.WriteLine(account.AccNumber);
                                 if (account.AccNumber == int.Parse(AccNum))
                                 {
                                     SelectedAccount = account;
-                                   TransactionChoice: Console.WriteLine("What would you like to do? Enter the number that corresponds to your choice");
-                                    Console.WriteLine("1. Deposit");
-                                    Console.WriteLine("2. Withdraw");
-                                    Console.WriteLine("3. Get Account Balance");
-                                    Console.WriteLine("4. Transfer");
-                                    Console.WriteLine("5. Get Account Statement");
-                                    Console.WriteLine("6. Log Out");
-                                    /*Console.WriteLine("Press # key to go to account menu");
-                                    var response = Console.ReadLine();
-                                    if(response == '#'.ToString())
-                                    {
-                                        goto LoginMenu;
-                                    }*/
-                                    
-                                    var action = Console.ReadLine();
-                                    switch (int.Parse(action))
-                                    {
-                                        case 1:
-                                            Console.Write("Deposit amount: ");
-                                            var DepositAmount = decimal.Parse(Console.ReadLine());
-                                            Console.Write("Optional note for this transaction: ");
-                                            var DepositNote = Console.ReadLine();
-                                            SelectedAccount.MakeDeposit(DepositAmount, DateTime.Now, DepositNote);
-                                            Console.Write("Press any key to go to the transactions menu.");
-                                            Console.ReadLine();
-                                            break;
-                                        case 2:
-                                            Console.Write("Withdrawal amount: ");
-                                            var WithdrawalAmount = decimal.Parse(Console.ReadLine());
-                                            Console.Write("Optional note for this transaction: ");
-                                            var WithdrawalNote = Console.ReadLine();
-                                            SelectedAccount.MakeWithdrawal(WithdrawalAmount, DateTime.Now, WithdrawalNote);
-                                            Console.Write("Press any key to go to the transactions menu.");
-                                            Console.ReadLine();
-                                            break;
-                                        case 3:
-                                            Console.WriteLine($"Your Account Balance is {SelectedAccount.Balance}");
-                                            Console.Write("Press any key to go to the transactions menu.");
-                                            Console.ReadLine();
-                                            break;
-                                        case 4:
-                                            Console.WriteLine("case transfer");
-                                            Console.Write("Press any key to go to the transactions menu.");
-                                            Console.ReadLine();
-                                            break;
-                                        case 5:
-                                            Console.WriteLine(SelectedAccount.GetStatement());
-                                            Console.Write("Press any key to go to the transactions menu.");
-                                            Console.ReadLine();
-                                            break;
-                                        case 6:
-                                            Console.WriteLine("working");
-                                            customer.LogOut();
-                                            ProgramIntro();
-                                            break;
-                                        default:
-                                            Console.WriteLine("You have made an invalid selection");
-                                            break;
-
-                                    }
-                                    goto TransactionChoice;
+                                  
                                 }
-                                else Console.WriteLine("Invalid Account Number");
+                                /*else Console.WriteLine("Invalid Account Number");
+                                Console.WriteLine("Press any key to try again");
+                                Console.ReadLine();
+                                goto GetAccount;*/
+                            }
+                            if(SelectedAccount == null)
+                            {
+                                Console.WriteLine("Invalid Account Number");
                                 Console.WriteLine("Press any key to try again");
                                 Console.ReadLine();
                                 goto GetAccount;
                             }
+                            else
+                            {
+                            TransactionChoice: Console.WriteLine("What would you like to do? Enter the number that corresponds to your choice");
+                                Console.WriteLine("1. Deposit");
+                                Console.WriteLine("2. Withdraw");
+                                Console.WriteLine("3. Get Account Balance");
+                                Console.WriteLine("4. Transfer");
+                                Console.WriteLine("5. Get Account Statement");
+                                Console.WriteLine("6. Log Out");
+                                /*Console.WriteLine("Press # key to go to account menu");
+                                var response = Console.ReadLine();
+                                if(response == '#'.ToString())
+                                {
+                                    goto LoginMenu;
+                                }*/
+
+                                var action = Console.ReadLine();
+                                switch (int.Parse(action))
+                                {
+                                    case 1:
+                                        Console.Write("Deposit amount: ");
+                                        var DepositAmount = decimal.Parse(Console.ReadLine());
+                                        Console.Write("Optional note for this transaction: ");
+                                        var DepositNote = Console.ReadLine();
+                                        SelectedAccount.MakeDeposit(DepositAmount, DateTime.Now, DepositNote);
+                                        Console.Write("Press any key to go to the transactions menu.");
+                                        Console.ReadLine();
+                                        break;
+                                    case 2:
+                                        Console.Write("Withdrawal amount: ");
+                                        var WithdrawalAmount = decimal.Parse(Console.ReadLine());
+                                        Console.Write("Optional note for this transaction: ");
+                                        var WithdrawalNote = Console.ReadLine();
+                                        SelectedAccount.MakeWithdrawal(WithdrawalAmount, DateTime.Now, WithdrawalNote);
+                                        Console.Write("Press any key to go to the transactions menu.");
+                                        Console.ReadLine();
+                                        break;
+                                    case 3:
+                                        Console.WriteLine($"Your Account Balance is {SelectedAccount.Balance}");
+                                        Console.Write("Press any key to go to the transactions menu.");
+                                        Console.ReadLine();
+                                        break;
+                                    case 4:
+                                        Console.WriteLine("case transfer");
+                                        Console.Write("Press any key to go to the transactions menu.");
+                                        Console.ReadLine();
+                                        break;
+                                    case 5:
+                                        Console.WriteLine(SelectedAccount.GetStatement());
+                                        Console.Write("Press any key to go to the transactions menu.");
+                                        Console.ReadLine();
+                                        break;
+                                    case 6:
+                                        Console.WriteLine("working");
+                                        customer.LogOut();
+                                        ProgramIntro();
+                                        break;
+                                    default:
+                                        Console.WriteLine("You have made an invalid selection");
+                                        break;
+
+                                }
+                                goto TransactionChoice;
+                            }
+                        default:
                             break;
                             #endregion
                     }

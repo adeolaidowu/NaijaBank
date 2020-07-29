@@ -101,7 +101,7 @@ namespace NaijaBank
                 }
                 var withdrawal = new Transaction(-amount, date, note);
                 myTransactions.Add(withdrawal);
-                Console.WriteLine($"You have successfully made a withdrawal of {amount} into your account");
+                Console.WriteLine($"You have successfully made a withdrawal of {amount} from your account");
             }
         }
         //method to transfer funds to another account
